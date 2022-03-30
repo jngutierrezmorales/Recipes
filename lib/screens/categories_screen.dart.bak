@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+
+import '../dummy_data.dart';
+import '../widgets/category_item.dart';
+
+class CategoriesScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // no devuelve Scaffold sino GridView que es lo que se quiere mostrar
+    return GridView(
+      padding: const EdgeInsets.all(25),
+      children: DUMMY_CATEGORIES
+          .map((catData) => CategoryItem(
+                catData.id,
+                catData.title,
+                catData.color,
+              ))
+          .toList(),
+      // define un ancho maximo para cada elemento de la cuadricula y luego
+      // crea las columnas necesarias
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200,
+        childAspectRatio: 3 / 2, // como se deben redimensionar estos elementos
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
+      ),
+    );
+  }
+}
